@@ -23,6 +23,10 @@ var data = {
 */
 var tgleaders = {
   baseUrl: 'https://leaders.topgolfmedia.com',
+  tid: function (id) {
+    var year = (new Date()).getFullYear().toString().substr(2);
+    return 'tour' + year + id;
+  },
   fetch: function (key, callback) { // callback(err, data)
     //console.log('fetch', key);
     if (!key)
@@ -78,10 +82,21 @@ var tgleaders = {
         tgleaders.clear(r);
       }
     }
+  },
+  pageInit: function ($element) {
+    var id = $element.data('id'),
+        roundNo = parseInt($element.data('rn')) || 0;
+
+    if (id && roundNo) {
+      tgleaders.displayAll(tgleaders.tid(id), roundNo);
+    }
   }
 };
 
 $(function () {
+  // display on page load, data from <section id="results"
+  tgleaders.pageInit($('#results'));
+
   // click on any event to load its data (all data-id="sample" in this example)
   $('.venue-col a').on('click', function () {
     var $link = $(this),
@@ -89,8 +104,7 @@ $(function () {
         roundNo = parseInt($link.data('rn')) || 0;
 
     if (id && roundNo) {
-      var year = (new Date()).getFullYear().toString().substr(2),
-          tourneyId = 'tour' + year + id; // (tourneyId === 'sample') ? tourneyId : 'tour' + year + tourneyId;
+      var tourneyId = tgleaders.tid(id);
 
       // display most recent round
       //tgleaders.display(tourneyId, roundNo);
