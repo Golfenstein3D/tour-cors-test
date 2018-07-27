@@ -22,19 +22,15 @@ var data = {
 };
 */
 var tgleaders = {
-  baseUrl: {
-    dev: 'http://leadersdev.topgolfmedia.com:3200',
-    prod: 'https://leaders.topgolfmedia.com',
-  },
+  baseUrl: 'https://leaders.topgolfmedia.com',
   fetch: function (key, callback) { // callback(err, data)
     //console.log('fetch', key);
     if (!key)
       return;
 
     // build url, bust cache once an hour
-    var env = location.hostname.split('.')[1],
-        busta = Math.ceil(Date.now() / 1000 / 60 / 60),
-        url = this.baseUrl[env] + '/json/' + key + '?' + busta;
+    var busta = Math.ceil(Date.now() / 1000 / 60 / 60),
+        url = this.baseUrl + '/json/' + key + '?' + busta;
 
     $.get(url).done(function (data) {
       callback(null, data);
