@@ -1,0 +1,97 @@
+.leaders {
+  font-size: 2.25vw;
+  text-align: center;
+  width: 100%;
+}
+.leaders table {
+  border-collapse: separate;
+  border-spacing: 2px;
+  color: #FFF;
+  empty-cells: show;
+  margin: 1em auto;
+  max-width: 800px;
+  width: 100%;
+}
+.leaders tr {
+  height: 1em;
+}
+.leaders tr.qual + tr:not(.qual) > td:not(.blank) {
+  border-top: 0.3ex solid #D3AC64;
+  border-top: 0.2vw solid #D3AC64;
+}
+.leaders th,
+.leaders td {
+  padding: 1ex;
+  text-align: center;
+  text-transform: uppercase;
+}
+.leaders th.blank,
+.leaders td.blank {
+  padding: 0;
+}
+.leaders th.shots,
+.leaders td.shots {
+  display: none;
+}
+.leaders th {
+  font-family: 'ShieldSans Bold', arial, sans-serif;
+  vertical-align: bottom;
+  white-space: nowrap;
+}
+.leaders th.rank,
+.leaders th.score,
+.leaders th.shots {
+  font-size: 85%;
+}
+.leaders th.rank,
+.leaders th.shots {
+  width: 9%;
+}
+.leaders th.score {
+  width: 12%;
+}
+.leaders th.total {
+  width: 14%;
+}
+.leaders td.rank,
+.leaders td.score {
+  background: #222;
+  font-weight: bold;
+}
+.leaders td.shots {
+  background: #333;
+}
+.leaders td.name,
+.leaders td.total {
+  background: #234;
+  font-weight: bold;
+}
+.leaders td.name {
+  max-width: 17em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.leaders tr.qual td.rank {
+  background: #E2C081;
+  background: linear-gradient(153deg, #E2C081 40%, #D3AC64 55%);
+  color: #000;
+}
+.leaders tr.qual td.score {
+  background: #333;
+}
+.leaders tr.qual td.shots {
+  background: #444;
+}
+.leaders tr.qual td.name,
+.leaders tr.qual td.total {
+  background: #345;
+}
+@media (min-width: 637px) {
+  .leaders {
+    font-size: 14px;
+  }
+  .leaders tr.qual + tr:not(.qual) > td:not(.blank) {
+    border-top: 2px solid #D3AC64;
+  }
+}
