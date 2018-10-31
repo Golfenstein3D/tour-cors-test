@@ -49,6 +49,13 @@ var tgleaders = {
       $table.html('');
     });
   },
+  clearBracket: function () {
+    //console.log('clearBracket');
+    var $bracket = $('#bracket');
+    $bracket.slideUp(250, function () {
+      $bracket.html('');
+    });
+  },
   display: function (tourneyId, roundNo) {
     //console.log('display', tourneyId, roundNo);
     // key, e.g. leaders_sample_r2 or leaders_tour18roseville_r1
@@ -75,6 +82,8 @@ var tgleaders = {
     });
   },
   displayAll: function (tourneyId, roundNo) {
+    tgleaders.clearBracket();
+
     for (var r = 3; r > 0; r--) {
       if (r <= roundNo) {
         tgleaders.display(tourneyId, r);
@@ -83,12 +92,106 @@ var tgleaders = {
       }
     }
   },
+  displayBracket: function (tourneyId, roundNo) {
+    if(console) console.log('displayBracket', tourneyId, roundNo);
+    var key = 'bracket_' + tourneyId;
+    if (roundNo) {
+      key += '_r' + roundNo;
+    }
+
+    tgleaders.fetch(key, function (err, json) {
+      if (err) {
+        console.warn(err);
+        tgleaders.clearBracket();
+        return;
+      }
+
+      // clear regular leaderboard
+      for (var r = 3; r > 0; r--) {
+        tgleaders.clear(r);
+      }
+
+      //console.log('json', json);
+      if (!json) {
+        return;
+      }
+
+      var leaders = json.leaders;
+      if (leaders && leaders.data) {
+        console.log('leaders', leaders.data);
+
+        if (leaders.data.length) {
+          // compile handlebars template & generate html for r0
+          var leadersTemplate = (leaders.template.indexOf('#') === 0) ? $(leaders.template).html() : leaders.template,
+              leadersTmpl = Handlebars.compile(leadersTemplate),
+              leadersHtml = leadersTmpl({ data: leaders.data });
+
+          // present them
+          $(leaders.target).html(leadersHtml).fadeIn();
+        }
+      }
+
+      var bracket = json.bracket;
+      if (bracket && bracket.data) {
+        console.log('bracket', bracket.data);
+
+        if (bracket.data.r1) {
+          // compile handlebars template & generate html for r0
+          var bracketTmpl = Handlebars.compile($(bracket.template).html()),
+              bracketHtml = bracketTmpl(bracket.data);
+
+          // present them
+          $(bracket.target).html(bracketHtml).fadeIn();
+
+          // highlight winning scores
+          $('.r1,.r2,.r3').find('.matchup').each(function (m, matchup) {
+            //console.log(m, matchup);
+            var $matchupDivs = $(matchup).children('div'),
+                $team1Boxes = $($matchupDivs[0]).find('.score'),
+                $team2Boxes = $($matchupDivs[1]).find('.score');
+
+            var scoreCount = Math.min($team1Boxes.length, $team2Boxes.length),
+                tie = 'tie',
+                top = 'top';
+
+            for (var s = 0; s < scoreCount; s++) {
+              var $team1Box = $($team1Boxes[s]),
+                  $team2Box = $($team2Boxes[s]),
+                  team1Score = parseInt($team1Box.text()) || 0,
+                  team2Score = parseInt($team2Box.text()) || 0;
+              //console.log('game', s + 1, team1Score, team2Score);
+
+              if (team1Score && team2Score) {
+                if (team1Score > team2Score) {
+                  $team1Box.removeClass(tie).addClass(top);
+                } else if (team2Score > team1Score) {
+                  $team2Box.removeClass(tie).addClass(top);
+                } else {
+                  $team1Box.removeClass(top).addClass(tie);
+                  $team2Box.removeClass(top).addClass(tie);
+                }
+              } else {
+                $team1Box.removeClass(tie + ' ' + top);
+                $team2Box.removeClass(tie + ' ' + top);
+              }
+            }
+          });
+        }
+      }
+    });
+  },
   pageInit: function ($element) {
     var id = $element.data('id'),
         roundNo = parseInt($element.data('rn')) || 0;
 
     if (id && roundNo) {
-      tgleaders.displayAll(tgleaders.tid(id), roundNo);
+      var tourneyId = tgleaders.tid(id);
+
+      if (tourneyId.startsWith('tour') && tourneyId.endsWith('final')) {
+        tgleaders.displayBracket(tourneyId, roundNo);
+      } else {
+        tgleaders.displayAll(tourneyId, roundNo);
+      }
     }
   }
 };
@@ -110,7 +213,11 @@ $(function () {
       //tgleaders.display(tourneyId, roundNo);
 
       // display all rounds (and hide rounds without data)
-      tgleaders.displayAll(tourneyId, roundNo);
+      if (tourneyId.startsWith('tour') && tourneyId.endsWith('final')) {
+        tgleaders.displayBracket(tourneyId, roundNo);
+      } else {
+        tgleaders.displayAll(tourneyId, roundNo);
+      }
 
       return false;
     }
