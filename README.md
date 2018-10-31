@@ -36,9 +36,9 @@ Set `data-id` and `data-rn` on links, and instead of linking to the href, it wil
 
 tgleaders.js sets events for: `$('.venue-col a').on('click',`
 
-`<a data-id="sample" data-rn="0" href="https://tgtour.leagueapps.com/">Sample, TEST</a>`
-
 `<a data-id="sample" data-rn="3" href="https://tgtour.leagueapps.com/">Sample, TEST</a>`
+
+`<a data-id="final" data-rn="4">Las Vegas, NV</a>`
 
 When the first link above is clicked, the link works normally and goes to the href URL.
 
