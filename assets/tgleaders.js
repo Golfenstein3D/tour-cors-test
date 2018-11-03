@@ -23,8 +23,8 @@ var data = {
 */
 var tgleaders = {
   baseUrl: 'https://leaders.topgolfmedia.com',
-  tid: function (id) {
-    var year = (new Date()).getFullYear().toString().substr(2);
+  tid: function (id, yr) {
+    var year = yr || (new Date()).getFullYear().toString().substr(2);
     return 'tour' + year + id;
   },
   fetch: function (key, callback) { // callback(err, data)
@@ -95,7 +95,7 @@ var tgleaders = {
   displayBracket: function (tourneyId, roundNo) {
     if(console) console.log('displayBracket', tourneyId, roundNo);
     var key = 'bracket_' + tourneyId;
-    if (roundNo) {
+    if (roundNo && roundNo < 4) {
       key += '_r' + roundNo;
     }
 
@@ -182,10 +182,11 @@ var tgleaders = {
   },
   pageInit: function ($element) {
     var id = $element.data('id'),
+        yr = $element.data('yr'),
         roundNo = parseInt($element.data('rn')) || 0;
 
     if (id && roundNo) {
-      var tourneyId = tgleaders.tid(id);
+      var tourneyId = tgleaders.tid(id, yr);
 
       if (tourneyId.startsWith('tour') && tourneyId.endsWith('final')) {
         tgleaders.displayBracket(tourneyId, roundNo);
@@ -204,10 +205,11 @@ $(function () {
   $('.venue-col a').on('click', function () {
     var $link = $(this),
         id = $link.data('id'),
+        yr = $link.data('yr'),
         roundNo = parseInt($link.data('rn')) || 0;
 
     if (id && roundNo) {
-      var tourneyId = tgleaders.tid(id);
+      var tourneyId = tgleaders.tid(id, yr);
 
       // display most recent round
       //tgleaders.display(tourneyId, roundNo);
