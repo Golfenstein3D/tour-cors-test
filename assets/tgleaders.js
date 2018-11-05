@@ -55,15 +55,15 @@ var tgleaders = {
   },
   clearBracket: function () {
     //console.log('clearBracket');
-    var $bracket = $('#bracket'),
+    var $bracket = $('#bracket div'),
         $leaders = $('#leaders');
 
     $bracket.slideUp(250, function () {
-      $bracket.children('div').html('');
+      $bracket.html('');
     });
 
     $leaders.slideUp(250, function () {
-      $leaders.children('table').html('');
+      $leaders.html('');
     });
   },
   display: function (tourneyId, roundNo) {
