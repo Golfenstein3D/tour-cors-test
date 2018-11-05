@@ -1,22 +1,65 @@
+/* RESULTS */
+#results {
+  padding: 2em 22px;
+}
+#results h2 {
+  color: #FFF;
+  font-family: 'Stag Black Italic', sans-serif;
+  font-size: 200%;
+  line-height: 1;
+  margin: 0;
+  max-width: 920px;
+  padding-bottom: 1ex;
+  text-align: left;
+  width: auto;
+  word-spacing: 0.2rem;
+}
+#results h2 span {
+  font-family: 'Stag Semibold Italic', sans-serif;
+  font-size: 66%;
+  opacity: 0.9;
+  padding-left: 8px;
+}
 #results h3 {
   font-family: 'ShieldSans Bold', arial, sans-serif;
   font-weight: normal;
   margin: 0.5ex 0;
   text-transform: uppercase;
 }
+@media (min-width: 480px) {
+  #results {
+    padding: 2em 24px;
+  }
+}
+@media (min-width: 1025px) {
+  #results {
+    max-width: 1025px;
+    padding: 3em 1.9%;
+  }
+}
+@media (min-width: 1200px) {
+  #results {
+    max-width: 1200px;
+    padding: 3em 1.5% 3.2em;
+  }
+}
 /* BRACKET */
 #bracket {
-  box-sizing: border-box;
   clear: both;
+  font-size: 80%;
   line-height: 1.15;
-  font-size: 90%;
-  font-size: 1.6vw;
-  margin: 0 3vw;
-  padding-top: 4.3ex;
-  padding-top: 6.6vh;
+  overflow: auto;
+  overflow-x: auto;
+  overflow-y: visible;
+  text-align: center;
+  width: 100%;
+}
+#bracket > div {
+  box-sizing: border-box;
+  margin: 0 10px 2ex;
   text-align: left;
-  width: 94%;
-  width: 94vw;
+  max-width: 1160px;
+  min-width: 748px;
 }
 #bracket .round,
 #bracket .matchup,
@@ -62,11 +105,12 @@
 }
 #bracket .team {
   background: #234;
+  border-left: none;
   overflow: hidden;
   padding: 1ex 1.5ex;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 66%;
+  width: 70%;
   word-spacing: normal;
 }
 #bracket .team sup {
@@ -100,7 +144,6 @@
   width: 25%;
 }
 #bracket .r1 .team {
-  border-left: none;
   padding: 1ex 1.5ex 1ex 0.5ex;
 }
 #bracket .r1 .matchup {
@@ -130,7 +173,7 @@
   width: 45.5%;
 }
 #bracket .r3 .score {
-  margin-left: 0.9%;
+  margin-left: 0.7%;
   width: 14.5%;
 }
 #bracket .r4 .matchup {
@@ -148,19 +191,42 @@
 #bracket .r4 small {
   color: #FFF;
 }
-@media (min-width: 1320px) {
+@media (min-width: 769px) {
   #bracket {
-    font-size: 107%;
+    font-size: 83%;
+  }
+  #bracket > div {
+    margin: 0 auto 2ex;
+    width: 94%;
   }
 }
-@media (min-width: 1560px) {
+@media (min-width: 870px) {
+  #bracket {
+    font-size: 90%;
+    font-size: 1.65vw;
+  }
+}
+@media (min-width: 970px) {
+  #bracket {
+    font-size: 100%;
+    font-size: 1.65vw;
+  }
+}
+@media (min-width: 1067px) {
+  #bracket {
+    font-size: 110%;
+    font-size: 1.65vw;
+  }
+}
+@media (min-width: 1164px) {
   #bracket {
     font-size: 120%;
+    font-size: 1.65vw;
   }
 }
-@media (min-width: 1860px) {
+@media (min-width: 1235px) {
   #bracket {
-    font-size: 140%;
+    font-size: 130%;
   }
 }
 /* LEADERS */
@@ -175,18 +241,19 @@
   color: #FFF;
   empty-cells: show;
   margin: 1em auto;
-  max-width: 800px;
+  max-width: 1160px;
   width: 100%;
 }
 .leaders tr {
   height: 1em;
 }
 .leaders tr.qual + tr:not(.qual) > td:not(.blank) {
-  border-top: 0.3ex solid #D3AC64;
-  border-top: 0.2vw solid #D3AC64;
+  border-top: 0.3ex solid #d5ae65;
+  border-top: 0.2vw solid #d5ae65;
 }
 .leaders th,
 .leaders td {
+  border-bottom: none !important;
   padding: 1ex;
   text-align: center;
   text-transform: uppercase;
@@ -206,6 +273,7 @@
 }
 .leaders th.rank,
 .leaders th.score,
+.leaders th.venue,
 .leaders th.shots {
   font-size: 85%;
 }
@@ -220,8 +288,9 @@
   width: 14%;
 }
 .leaders td.rank,
+.leaders td.venue,
 .leaders td.score {
-  background: #222;
+  background: #282828;
   font-weight: bold;
 }
 .leaders td.shots {
@@ -243,24 +312,25 @@
 }
 .leaders tr.qual td.rank {
   background: #E2C081;
-  background: linear-gradient(153deg, #E2C081 40%, #D3AC64 55%);
+  background: linear-gradient(153deg, #E2C081 40%, #d5ae65 55%);
   color: #000;
 }
+.leaders tr.qual td.venue,
 .leaders tr.qual td.score {
-  background: #333;
+  background: #373737;
 }
 .leaders tr.qual td.shots {
   background: #444;
 }
 .leaders tr.qual td.name,
 .leaders tr.qual td.total {
-  background: #345;
+  background: #33475c;
 }
 @media (min-width: 637px) {
   .leaders {
     font-size: 14px;
   }
   .leaders tr.qual + tr:not(.qual) > td:not(.blank) {
-    border-top: 2px solid #D3AC64;
+    border-top: 2px solid #d5ae65;
   }
 }

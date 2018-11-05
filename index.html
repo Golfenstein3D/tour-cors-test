@@ -180,8 +180,9 @@
 	</div>
 </section>
 
-<section id="results" data-id="sample" data-rn="3"><!--for tgleaders.pageInit-->
-	<article id="bracket"></article>
+<section id="results" data-id="final" data-rn="4"><!--for tgleaders.pageInit-->
+	<article id="bracket"><div style="display:none"></div></article>
+	<article id="leaders" class="leaders"><table style="display:none"></table></article>
 	<article id="leadersR3" class="leaders"><table style="display:none"></table></article>
 	<article id="leadersR2" class="leaders"><table style="display:none"></table></article>
 	<article id="leadersR1" class="leaders"><table style="display:none"></table></article>
@@ -196,16 +197,12 @@
 			<th class="score">Game 1</th><th class="score">Game 2</th>
 			<th class="blank"></th><th class="total">Total</th>
 		</tr></thead>
-		<tbody>
-		{{#data}}
-			<tr class="{{#if q}}qual{{/if}}">
-				<td class="rank">{{rank}}</td><td class="blank"></td>
-				<td class="name"><span>{{name}}</span></td><td class="blank"></td>
-				<td class="score">{{score1}}</td><td class="score">{{score2}}</td>
-				<td class="blank"></td><td class="total">{{total}}</td>
-			</tr>
-		{{/data}}
-		</tbody>
+		<tbody>{{#data}}<tr class="{{#if q}}qual{{/if}}">
+			<td class="rank">{{rank}}</td><td class="blank"></td>
+			<td class="name"><span>{{name}}</span></td><td class="blank"></td>
+			<td class="score">{{score1}}</td><td class="score">{{score2}}</td>
+			<td class="blank"></td><td class="total">{{total}}</td>
+		</tr>{{/data}}</tbody>
 	</table>
 </script>
 

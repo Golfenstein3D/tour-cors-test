@@ -1,6 +1,7 @@
-/*jshint browser:true, devel:true, jquery:true, maxlen:700 */
-/*jscs:disable maximumLineLength */
-/*globals Handlebars */
+/* eslint max-len:off */
+/* jscs:disable maximumLineLength */
+/* jshint browser:true, devel:true, jquery:true, maxlen:700 */
+/* globals Handlebars */
 
 /* EXAMPLE DATA
 var data = {
@@ -22,7 +23,10 @@ var data = {
 };
 */
 var tgleaders = {
-  baseUrl: 'https://leaders.topgolfmedia.com',
+  debug: (location.hostname !== 'tour.topgolf.com'),
+  baseUrl: (function () {
+    return 'https://leaders.' + (location.hostname === 'localhost' ? 'loc.topgolfmedia.com:3443' : 'topgolfmedia.com');
+  }()),
   tid: function (id, yr) {
     var year = yr || (new Date()).getFullYear().toString().substr(2);
     return 'tour' + year + id;
@@ -51,9 +55,15 @@ var tgleaders = {
   },
   clearBracket: function () {
     //console.log('clearBracket');
-    var $bracket = $('#bracket');
+    var $bracket = $('#bracket'),
+        $leaders = $('#leaders');
+
     $bracket.slideUp(250, function () {
-      $bracket.html('');
+      $bracket.children('div').html('');
+    });
+
+    $leaders.slideUp(250, function () {
+      $leaders.children('table').html('');
     });
   },
   display: function (tourneyId, roundNo) {
@@ -68,7 +78,7 @@ var tgleaders = {
         return;
       }
 
-      console.log('json', json);
+      //console.log('json', json);
       if (json && json.leaders) {
         // compile handlebars template
         var template = Handlebars.compile(json.leaders.template);
@@ -93,7 +103,7 @@ var tgleaders = {
     }
   },
   displayBracket: function (tourneyId, roundNo) {
-    if(console) console.log('displayBracket', tourneyId, roundNo);
+    if(tgleaders.debug) console.log('displayBracket', tourneyId, roundNo);
     var key = 'bracket_' + tourneyId;
     if (roundNo && roundNo < 4) {
       key += '_r' + roundNo;
@@ -111,37 +121,38 @@ var tgleaders = {
         tgleaders.clear(r);
       }
 
-      //console.log('json', json);
+      if(tgleaders.debug) console.log('json', json);
       if (!json) {
         return;
       }
-
+      /* not showing combined qualifier leaderboard
       var leaders = json.leaders;
       if (leaders && leaders.data) {
-        console.log('leaders', leaders.data);
+        if(tgleaders.debug) console.log('leaders', leaders.data);
 
         if (leaders.data.length) {
           // compile handlebars template & generate html for r0
-          var leadersTemplate = (leaders.template.indexOf('#') === 0) ? $(leaders.template).html() : leaders.template,
+          var leadersTemplate = (leaders.template.indexOf('<') === 0) ? leaders.template : $('#leaders-template').html(),
               leadersTmpl = Handlebars.compile(leadersTemplate),
               leadersHtml = leadersTmpl({ data: leaders.data });
 
           // present them
-          $(leaders.target).html(leadersHtml).fadeIn();
+          $('#leaders').html(leadersHtml).fadeIn(); // leaders.target
         }
       }
-
+      */
       var bracket = json.bracket;
       if (bracket && bracket.data) {
-        console.log('bracket', bracket.data);
+        if(tgleaders.debug) console.log('bracket', bracket.data);
 
         if (bracket.data.r1) {
           // compile handlebars template & generate html for r0
-          var bracketTmpl = Handlebars.compile($(bracket.template).html()),
+          var bracketTemplate = (bracket.template.indexOf('<') === 0) ? bracket.template : $('#bracket-template').html(),
+              bracketTmpl = Handlebars.compile(bracketTemplate),
               bracketHtml = bracketTmpl(bracket.data);
 
           // present them
-          $(bracket.target).html(bracketHtml).fadeIn();
+          $('#bracket div').html(bracketHtml).fadeIn(); // bracket.target
 
           // highlight winning scores
           $('.r1,.r2,.r3').find('.matchup').each(function (m, matchup) {

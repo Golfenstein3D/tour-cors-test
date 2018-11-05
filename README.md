@@ -19,6 +19,11 @@ You don't need to include `tour18` in the HTML, because the code in tgleaders.js
  - `<a data-id="edison" data-rn="3" href="#">Edison, NJ</a>`
  - `<a data-id="saltlakecity" data-rn="0" href="#">Salt Lake City, UT</a>`
 
+For the championship, templates are not in the data, and need to be added to the HTML.
+
+See `bracket`, `leaders`, `bracket-template`, `leaders-template` in [index.html](blob/master/index.html).
+
+
 
 ### Working Example
 
@@ -36,9 +41,8 @@ Set `data-id` and `data-rn` on links, and instead of linking to the href, it wil
 
 tgleaders.js sets events for: `$('.venue-col a').on('click',`
 
-`<a data-id="sample" data-rn="3" href="https://tgtour.leagueapps.com/">Sample, TEST</a>`
-
-`<a data-id="final" data-rn="4">Las Vegas, NV</a>`
+- `<a data-id="sample" data-rn="0" href="https://tgtour.leagueapps.com/">Sample, TEST</a>`
+- `<a data-id="sample" data-rn="3" href="https://tgtour.leagueapps.com/">Sample, TEST</a>`
 
 When the first link above is clicked, the link works normally and goes to the href URL.
 
@@ -47,4 +51,16 @@ When the second link is clicked, the code requests the leaders for 3 rounds of `
  - `https://leaders.topgolfmedia.com/json/leaders_tour18sample_r1`
  - `https://leaders.topgolfmedia.com/json/leaders_tour18sample_r2`
  - `https://leaders.topgolfmedia.com/json/leaders_tour18sample_r3`
+
+There are three parts to the championship (can't display a combined qualifier, unfortunately):
+
+ - `<a data-id="qualifier1" data-rn="1" href="#">Championship Qualifier 1</a>`
+ - `<a data-id="qualifier2" data-rn="1" href="#">Championship Qualifier 2</a>`
+ - `<a data-id="final" data-rn="4" href="#">Championship Bracket</a>`
+
+
+
+## OPTIMIZE
+
+Production website must use minified css/js files.
 
