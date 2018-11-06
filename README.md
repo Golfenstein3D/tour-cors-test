@@ -64,7 +64,7 @@ There are three parts to the championship (can't display a combined qualifier, u
 
 Production website must use minified css/js files.
 
-Non-minified assets have been removed from this repo.  If you need to make changes...
+Non-minified css has been removed from this repo.  If you need to make changes...
 
 
 ### Node.js
