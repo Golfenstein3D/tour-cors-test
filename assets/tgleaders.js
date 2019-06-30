@@ -70,6 +70,7 @@ var tgleaders = {
     //console.log('display', tourneyId, roundNo);
     // key, e.g. leaders_sample_r2 or leaders_tour18roseville_r1
     var key = 'leaders_' + tourneyId + '_r' + roundNo;
+    var $roundTable = $('#leadersR' + roundNo + ' table');
 
     tgleaders.fetch(key, function (err, json) {
       if (err) {
@@ -87,7 +88,9 @@ var tgleaders = {
         var html = template({ data: json.leaders.data });
 
         // present them
-        $('#leadersR' + roundNo + ' table').html(html).fadeIn();
+        $roundTable.html(html).fadeIn();
+      } else {
+        $roundTable.html('').slideUp();
       }
     });
   },
