@@ -69,7 +69,7 @@ Non-minified css has been removed from this repo.  If you need to make changes..
 
 ### Node.js
 
-Download and install [Node v8.15.0](https://nodejs.org/dist/latest-v8.x/) or higher.
+Download and install [Node v10.15.2](https://nodejs.org/dist/latest-v10.x/) or higher.
 Node is not just a server thing.
 [Tools from NPM](https://www.npmjs.com/search?q=keywords:css) streamline client-side web development.
 
