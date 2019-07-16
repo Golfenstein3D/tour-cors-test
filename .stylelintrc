@@ -15,7 +15,7 @@ rules:
   block-opening-brace-space-after: always-single-line
   block-opening-brace-space-before: always-multi-line
 
-  color-hex-case: upper
+  color-hex-case:
   color-hex-length: short
   color-named: never
   color-no-invalid-hex: true
