@@ -7,17 +7,16 @@ For Tour, there are three rounds, so 0 = off, 3 = on (if there's only data for r
 The VenueID is based on the URL path of a venue found via [topgolf.com/us/locations](https://topgolf.com/us/locations), but with the hyphens removed...
 
  - `https://topgolf.com/us/edison/` -> `edison`
- - `https://topgolf.com/us/salt-lake-city/` -> `saltlakecity`
+ - `https://topgolf.com/us/las-vegas/` -> `lasvegas`
 
 The Topgolf Tour TourneyID is `tour` + 2-digit year + VenueID...
 
- - `edison` -> `tour18edison`
- - `saltlakecity` -> `tour18saltlakecity`
+ - `lasvegas` -> `tour19lasvegas`
 
-You don't need to include `tour18` in the HTML, because the code in tgleaders.js prepends it...
+You don't need to include `tour19` in the HTML for the current year, because tgleaders.js prepends it.
+However, data-year should be added so it continues to load this year's data in January of next year.
 
- - `<a data-id="edison" data-rn="3" href="#">Edison, NJ</a>`
- - `<a data-id="saltlakecity" data-rn="0" href="#">Salt Lake City, UT</a>`
+ - `<a data-year="19" data-id="lasvegas" data-rn="0" href="#">Las Vegas, NV</a>`
 
 For the championship, templates are not in the data, and need to be added to the HTML.
 
@@ -76,6 +75,7 @@ Node is not just a server thing.
 The following commands install packages globally (`-g`) so you can use them from the command line.
 (Don't use `sudo` on Windows.)
 
+    sudo npm install -g browserslist
     sudo npm install -g less
     sudo npm install -g less-plugin-autoprefix
     sudo npm install -g less-plugin-clean-css

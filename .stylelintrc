@@ -23,7 +23,12 @@ rules:
   comment-no-empty: true
   comment-whitespace-inside: always
 
-  custom-property-empty-line-before: always
+  custom-property-empty-line-before:
+    - always
+    - except:
+      - after-comment
+      - after-custom-property
+      - first-nested
 
   declaration-bang-space-after: never
   declaration-bang-space-before: always
@@ -61,7 +66,10 @@ rules:
   length-zero-no-unit: true
 
   max-empty-lines: 5
-  max-line-length: 180
+  max-line-length:
+    - 180
+    - ignore:
+      - comments
   max-nesting-depth: 4
 
   media-feature-colon-space-after: always

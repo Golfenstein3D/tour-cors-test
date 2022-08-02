@@ -21,7 +21,6 @@
     "no-empty": ["warn"],
     "no-prototype-builtins": ["error"],
     "no-template-curly-in-string": ["error"],
-    "valid-jsdoc": ["warn", { "requireReturn": false, "requireReturnDescription": false }],
 
     //eslint.org/docs/rules/#best-practices
     "accessor-pairs": ["warn"],
@@ -109,7 +108,7 @@
     "computed-property-spacing": ["warn", "never"],
     "func-call-spacing": ["warn", "never"],
     "key-spacing": ["warn", { "beforeColon": false, "afterColon": true }],
-    "linebreak-style": ["warn", "windows"],
+    "linebreak-style": ["warn", "unix"],
     "max-depth": ["warn", 8],
     "max-len": ["warn", { "code": 180, "ignoreTemplateLiterals": true, "ignoreUrls": true }],
     "max-lines": ["warn", { "max": 1000, "skipBlankLines": true, "skipComments": true }],

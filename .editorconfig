@@ -3,14 +3,16 @@
 # default: applies to all files unless specified below or by another file
 [*]
 charset = utf-8
-end_of_line = crlf
+end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 indent_style = space
 indent_size = 2
 
-[*.{htm,html}]
+# TAB
+[*.{htm,html,svg}]
 indent_style = tab
 
+# Markdown: keep whitespace
 [*.md]
 trim_trailing_whitespace = false
