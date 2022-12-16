@@ -20,7 +20,7 @@ However, data-year should be added so it continues to load this year's data in J
 
 For the championship, templates are not in the data, and need to be added to the HTML.
 
-See `bracket`, `leaders`, `bracket-template`, `leaders-template` in [index.html](blob/main/index.html).
+See `bracket`, `leaders`, `bracket-template`, `leaders-template` in [index.html](./index.html).
 
 
 
