@@ -15,13 +15,11 @@ rules:
   block-opening-brace-space-after: always-single-line
   block-opening-brace-space-before: always-multi-line
 
-  color-hex-case:
   color-hex-length: short
   color-named: never
   color-no-invalid-hex: true
 
   comment-no-empty: true
-  comment-whitespace-inside: always
 
   custom-property-empty-line-before:
     - always
@@ -58,6 +56,7 @@ rules:
 
   indentation:
     - 2
+    - baseIndentLevel: 0
     - ignore:
       - value
 
@@ -84,6 +83,7 @@ rules:
   media-query-list-comma-space-after: always-single-line
   media-query-list-comma-space-before: never
 
+  no-duplicate-at-import-rules: true
   no-duplicate-selectors: true
   no-empty-source: true
   no-eol-whitespace: true
