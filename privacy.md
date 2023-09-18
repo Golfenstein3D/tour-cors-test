@@ -1,5 +1,11 @@
 
-<style> .legal ol ol{list-style-type:lower-alpha;padding-left:2em;} </style>
+<style>
+.privacy h2{margin-top:3em;}
+.privacy ol ol{list-style-type:lower-alpha;padding-left:2em;}
+.privacy pre{font-size:90%;overflow:auto;}
+.privacy small.noprint{color:#777;font-size:12px;user-select:none;}
+@media print{.privacy .noprint{display:none!important;}}
+</style>
 
 **Our Privacy Notice has been updated and is effective as of September 29, 2023 (the "Effective Date").**
 
