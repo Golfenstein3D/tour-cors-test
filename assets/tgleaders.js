@@ -1,6 +1,4 @@
 /* eslint max-len:off */
-/* jscs:disable maximumLineLength */
-/* jshint browser:true, devel:true, jquery:true, maxlen:700 */
 /* globals Handlebars */
 
 /* EXAMPLE DATA
